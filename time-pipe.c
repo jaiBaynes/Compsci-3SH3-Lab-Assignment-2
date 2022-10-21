@@ -14,8 +14,8 @@ int main(void) {
     struct timeval current;
     gettimeofday(&current, NULL);
 
-    int write_msg[BUFFER_SIZE] = current.tv_sec; //possible answer
-    int read_msg[BUFFER_SIZE];
+    long write_msg[BUFFER_SIZE] = current; //possible answer
+    long read_msg[BUFFER_SIZE];
     int fd[2];
     pid_t pid;
 
@@ -46,6 +46,7 @@ int main(void) {
         /* read from the pipe */
         read(fd[READ_END], read_msg, BUFFER_SIZE);
         printf("read %p",read_msg);
+        printf("Seconds: %p Miliseconds: %p",read_msg.tv_sec, read_msg.tv_usec);
         /* close the read end of the pipe */
         close(fd[READ_END]);
     }
